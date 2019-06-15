@@ -1,0 +1,10 @@
+{
+  "defaultSeverity": "error",
+  "extends": [],
+  "linterOptions": {
+    "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
+  },
+  "jsRules": {},
+  "rules": {},
+  "rulesDirectory": []
+}
