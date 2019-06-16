@@ -31,7 +31,7 @@ export class Commands extends Component<Props, State> {
     if (challenger === computer) {
       result = "tie";
     } else if (challenger === "rock") {
-      if (computer === "papper") {
+      if (computer === "paper") {
         result = "loose";
       } else {
         result = "win";
@@ -185,11 +185,12 @@ export class Commands extends Component<Props, State> {
   }
 
   handleResult(result: string) {
+    const { challengerWinCounter, challengerLooseCounter } = this.props;
     this.setState({ result });
     if (result === "win") {
-      this.props.challengerWinCounter();
+      challengerWinCounter();
     } else if (result === "loose") {
-      this.props.challengerLooseCounter();
+      challengerLooseCounter();
     }
   }
 
@@ -218,12 +219,12 @@ export class Commands extends Component<Props, State> {
   }
 }
 
-function mapDispatchToProps(dispatch: any) {
+const mapDispatchToProps = (dispatch: any) => {
   return {
     challengerLooseCounter: () => dispatch(challengerLooseCounter()),
     challengerWinCounter: () => dispatch(challengerWinCounter()),
   };
-}
+};
 
 const mapStateToProps = (state: any) => {
   return {
