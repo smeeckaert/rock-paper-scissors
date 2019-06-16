@@ -71,7 +71,7 @@ export class InputBox extends Component<Props, State> {
           className={[
             inputCompleted ? "js-animation--leave " : "",
             " input__wrapper",
-          ]}
+          ].join(' ')}
         >
           <div className="input__field">
             <input
@@ -96,7 +96,7 @@ export class InputBox extends Component<Props, State> {
               OK
             </button>
           </div>
-          <div className={[this.inputAlert(), " input__alert"]}>
+          <div className={[this.inputAlert(), " input__alert"].join(' ')}>
             <i>Between 3 and 10 characters</i>
           </div>
         </div>

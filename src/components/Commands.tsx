@@ -63,7 +63,7 @@ export class Commands extends Component<Props, State> {
             className={[
               this.hideAnimationAction(action),
               ` ${action}__wrapper`,
-            ]}
+            ].join(' ')}
             onClick={() => this.handleAction(action)}
             key={action.toString()}
           >

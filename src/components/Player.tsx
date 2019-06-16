@@ -20,7 +20,7 @@ export class Player extends Component<Props> {
         className={[
           challengerName.length > 0 ? "js-animation--enter " : "",
           " player",
-        ]}
+        ].join(' ')}
       >
         <div className="player__wrapper">
           <div className="player__presentation">
