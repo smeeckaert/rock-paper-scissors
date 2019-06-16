@@ -8,7 +8,6 @@ export interface Props {
 
 interface State {
   challengerName: string;
-  challengerNameIsCorrect: any;
   inputCompleted: boolean;
 }
 
@@ -18,36 +17,36 @@ export class InputBox extends Component<Props, State> {
 
     this.state = {
       challengerName: "",
-      challengerNameIsCorrect: null,
       inputCompleted: false,
     };
+    this.challengerNameIsCorrect = this.challengerNameIsCorrect.bind(this);
+  }
+
+  challengerNameIsCorrect() {
+    const {challengerName} = this.state;
+    if (challengerName.length === 0) {
+      return null;
+    } else if (challengerName.length < 3 || challengerName.length > 10) {
+      return false;
+    } 
+    return true;
   }
 
   handleInputValue(e: any) {
     const { value } = e.target;
     this.setState({ challengerName: value });
-    if (value.length === 0) {
-      this.setState({ challengerNameIsCorrect: null });
-    } else if (value.length < 3) {
-      this.setState({ challengerNameIsCorrect: false });
-    } else if (value.length > 10) {
-      this.setState({ challengerNameIsCorrect: false });
-    } else {
-      this.setState({ challengerNameIsCorrect: true });
-    }
   }
 
   handleInputSubmit(e: any) {
-    let { challengerName, challengerNameIsCorrect } = this.state;
-    if (challengerNameIsCorrect) {
+    let { challengerName } = this.state;
+    if (this.challengerNameIsCorrect()) {
       this.props.challengerNameAction(challengerName);
       this.setState({ inputCompleted: true });
     }
   }
 
   inputAlert() {
-    let { challengerNameIsCorrect } = this.state;
-    switch (challengerNameIsCorrect) {
+    switch (this.challengerNameIsCorrect()) {
       case true:
         return " js-active ";
       case false:
@@ -61,7 +60,6 @@ export class InputBox extends Component<Props, State> {
   render(): React.ReactNode {
     const {
       challengerName,
-      challengerNameIsCorrect,
       inputCompleted,
     } = this.state;
 
@@ -90,8 +88,8 @@ export class InputBox extends Component<Props, State> {
             />
             <button
               onClick={e => this.handleInputSubmit(e)}
-              className={challengerNameIsCorrect ? "js-active" : "js-inactive"}
-              disabled={challengerNameIsCorrect ? false : true}
+              className={this.challengerNameIsCorrect() ? "js-active" : "js-inactive"}
+              disabled={this.challengerNameIsCorrect() ? false : true}
             >
               OK
             </button>

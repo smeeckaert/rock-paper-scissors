@@ -25,23 +25,28 @@ describe("Shallow rendered InputBox", () => {
   });
 
   
-  it("should return false if challenger name have less than 3 characters", () => {
-    wrapper.setState({ challengerName: "te" }, () => {
-      expect(wrapper.state().challengerNameIsCorrect).toBeFalsy();
+  it("should return null if challenger name is not set", () => {
+    wrapper.setState({ challengerName: "" }, () => {
+      expect(wrapper.instance().challengerNameIsCorrect()).toBe(null);
     });
   });
-  /*
+
+  it("should return false if challenger name have less than 3 characters", () => {
+    wrapper.setState({ challengerName: "te" }, () => {
+      expect(wrapper.instance().challengerNameIsCorrect()).toBe(false);
+    });
+  });
+  
 
   it("should return true if challenger name have more than 3 characteres and less than 10 characters", () => {
     wrapper.setState({ challengerName: "test" }, () => {
-      expect(wrapper.state().challengerNameIsCorrect).toBeTruthy();
+      expect(wrapper.instance().challengerNameIsCorrect()).toBe(true);
     });
   });
 
   it("should return false if challenger name have more than 10 characters", () => {
     wrapper.setState({ challengerName: "testtesttest" }, () => {
-      expect(wrapper.state().challengerNameIsCorrect).toBeFalsy();
+      expect(wrapper.instance().challengerNameIsCorrect()).toBe(false);
     });
   });
-  */
 });
